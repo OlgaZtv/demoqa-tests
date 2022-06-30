@@ -84,13 +84,12 @@ def test_change_table():
     s(f'{path_to_new_row}[6]').should(have.exact_text('QA'))
 
     s('#edit-record-2').click()
-    s('#firstName').type('Ivan')
-    s('#lastName').type('Ivanov')
-    s('#userEmail').click().clear()
-    s('#userEmail').type('test2@test.ru')
-    s('#age').type('25')
-    s('#salary').type('1200')
-    s('#department').type('QA')
+    s('#firstName').click().clear().type('Ivan')
+    s('#lastName').click().clear().type('Ivanov')
+    s('#userEmail').click().clear().type('test2@test.ru')
+    s('#age').click().clear().type('25')
+    s('#salary').click().clear().type('1200')
+    s('#department').click().clear().type('QA')
     s('#submit').click()
 
     path_to_column = '//*[@class="rt-td"]'
@@ -102,10 +101,10 @@ def test_change_table():
     s(f'{path_to_row + path_to_column}[5]').should(have.exact_text('1200'))
     s(f'{path_to_row + path_to_column}[6]').should(have.exact_text('QA'))
 
-    path_to_row = '//*[@class="rt-table"]//*[@class="rt-tbody"]//*[@role="rowgroup"][3]'
-    path_to_column = '//*[@class="rt-td"]'
-    path_to_delete_button = '#delete-record-3'
     s('.main-header').should(have.exact_text('Web Tables'))
+    path_to_row = '//*[@class="rt-table"]//*[@class="rt-tbody"]//*[@role="rowgroup"][4]'
+    path_to_column = '//*[@class="rt-td"]'
+    path_to_delete_button = '//*[@title="Delete"]'
     s(path_to_column + path_to_delete_button).click()
 
     s(f'{path_to_row + path_to_column}[1]').should(have.exact_text(' '))

@@ -12,5 +12,5 @@ def browser_management():
             os.getenv('selene.hold_browser_open', 'false').lower() == 'true'
     )
     browser.config.timeout = float(os.getenv('selene.timeout', '3'))
-    browser.config.window_width = 1900
-    browser.config.window_height = 1040
+    browser.config.window_width = 1600
+    browser.config.window_height = 800

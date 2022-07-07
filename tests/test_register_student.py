@@ -31,8 +31,10 @@ def test_register_student():
     mobile_number = '#userNumber'
     s(mobile_number).type('1111111111')
 
-    date_picker = Datepicker(s('#dateOfBirthInput'))
-    date_picker.autocomplete(option='31 Aug,1988')
+    date_of_birth = Datepicker(s('#dateOfBirthInput'))
+    date_of_birth.select_year(1988)
+    date_of_birth.select_month(8)
+    date_of_birth.select_day(31)
 
     subjects = TagsInput(s('#subjectsInput'))
     subjects.add('Chem', autocomplete='Chemistry')
@@ -55,14 +57,14 @@ def test_register_student():
 
     s('#example-modal-sizes-title-lg').should(have.exact_text('Thanks for submitting the form'))
 
-    results = Table(s('.modal-content .table'))
+    results = Table(s('.modal-dialog'))
 
     results.cells_of_row(0).should(have.exact_text('Student Name Olga Lastname'))
     results.cells_of_row(1).should(have.exact_text('Student Email test@test.com'))
     results.cells_of_row(2).should(have.exact_text('Gender Female'))
     results.cells_of_row(3).should(have.exact_text('Mobile 1111111111'))
     results.cells_of_row(4).should(have.exact_text('Date of Birth 31 August,1988'))
-    results.cells_of_row(5).should(have.exact_text('Subjects Maths'))
+    results.cells_of_row(5).should(have.exact_text('Subjects Chemistry, Maths'))
     results.cells_of_row(6).should(have.exact_text('Hobbies Sports'))
     results.cells_of_row(7).should(have.exact_text('Picture 01.jpg'))
     results.cells_of_row(8).should(have.exact_text('Address Some test address'))

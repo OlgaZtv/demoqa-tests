@@ -1,11 +1,11 @@
-from selene import have, command, elements
+from selene import have, command
 from selene.support.shared import browser
 from selene.support.shared.jquery_style import s, ss
 
-from demoqa_tests.controls import date_picker
-from demoqa_tests.controls import dropdown
-from demoqa_tests.controls.path_to_file import resourse
-from demoqa_tests.controls.table import cells_row
+from demoqa_tests.controls.date_picker import Datepicker
+from demoqa_tests.controls.dropdown import Dropdown
+from demoqa_tests.utils import path_to_file
+from demoqa_tests.controls.table import Table
 from demoqa_tests.controls.tags_input import TagsInput
 
 
@@ -31,36 +31,41 @@ def test_register_student():
     mobile_number = '#userNumber'
     s(mobile_number).type('1111111111')
 
-    # date_picker.select(s('.react-datepicker__month-select'), option='August')
-    # date_picker.select(s('.react-datepicker__year-select'), option='1988')
-    date_picker.autocomplete(s('#dateOfBirthInput'), option='31 Aug,1988')
+    date_picker = Datepicker(s('#dateOfBirthInput'))
+    date_picker.autocomplete(option='31 Aug,1988')
 
-    subjects = TagsInput(browser.element('#subjectsInput'))
+    subjects = TagsInput(s('#subjectsInput'))
     subjects.add('Chem', autocomplete='Chemistry')
     subjects.add('Maths')
 
-    s('#hobbies-checkbox-1').perform(command.js.click)
+    hobbies_types = s('#hobbiesWrapper')
+    hobbies_types.all('.custom-checkbox').element_by(have.exact_text('Sports')).click()
 
-    s("#uploadPicture").send_keys(resourse('01.jpg'))
+    s('#uploadPicture').send_keys(path_to_file.resourse('01.jpg'))
 
     s('#currentAddress').type('Some test address')
 
-    dropdown.autocomplete(s('#state input'), option='NCR')
-    dropdown.autocomplete(s('#city input'), option='Deldhi')
+    state_element = Dropdown(s('#state input'))
+    state_element.autocomplete(option='NCR')
+
+    city_element = Dropdown(s('#city input'))
+    city_element.autocomplete(option='Delhi')
 
     s('#submit').perform(command.js.click)
 
     s('#example-modal-sizes-title-lg').should(have.exact_text('Thanks for submitting the form'))
 
-    cells_row(ss('table tr'), index=1, option="Olga Lastname")
-    cells_row(ss('table tr'), index=2, option="test@test.com")
-    cells_row(ss('table tr'), index=3, option="Female")
-    cells_row(ss('table tr'), index=4, option="1111111111")
-    cells_row(ss('table tr'), index=5, option="31 August,1988")
-    cells_row(ss('table tr'), index=6, option="Maths")
-    cells_row(ss('table tr'), index=7, option="Sports")
-    cells_row(ss('table tr'), index=8, option="01.jpg")
-    cells_row(ss('table tr'), index=9, option="Some test address")
-    cells_row(ss('table tr'), index=10, option="NCR Delhi")
+    results = Table(s('.modal-content .table'))
+
+    results.cells_of_row(0).should(have.exact_text('Student Name Olga Lastname'))
+    results.cells_of_row(1).should(have.exact_text('Student Email test@test.com'))
+    results.cells_of_row(2).should(have.exact_text('Gender Female'))
+    results.cells_of_row(3).should(have.exact_text('Mobile 1111111111'))
+    results.cells_of_row(4).should(have.exact_text('Date of Birth 31 August,1988'))
+    results.cells_of_row(5).should(have.exact_text('Subjects Maths'))
+    results.cells_of_row(6).should(have.exact_text('Hobbies Sports'))
+    results.cells_of_row(7).should(have.exact_text('Picture 01.jpg'))
+    results.cells_of_row(8).should(have.exact_text('Address Some test address'))
+    results.cells_of_row(9).should(have.exact_text('State and City NCR Delhi'))
 
     s('#closeLargeModal').perform(command.js.click)

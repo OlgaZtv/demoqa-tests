@@ -1,12 +1,16 @@
 from selene import command, have
-from selene.core.entity import SeleneElement
+from selene.core.entity import Element
 from selene.support.shared.jquery_style import ss
 
 
-def select(element: SeleneElement, /, *, option: str):
-    element.perfom(command.js.scroll_into_view).click()
-    ss('[id^=react-select-][id*=-option]').element_by(have.exact_text(option)).click()
+class Dropdown:
 
+    def __init__(self, element: Element):
+        self.element = element
 
-def autocomplete(element: SeleneElement, /, *, option: str):
-    element.type(option).press_tab().press_enter()
+    def select(self, /, *, option: str):
+        self.element.perfom(command.js.scroll_into_view).click()
+        ss('[id^=react-select-][id*=-option]').element_by(have.exact_text(option)).click()
+
+    def autocomplete(self, /, *, option: str):
+        self.element.type(option).press_tab()

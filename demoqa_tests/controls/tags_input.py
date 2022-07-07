@@ -6,6 +6,7 @@ from selene.support.shared import browser
 
 
 class TagsInput:
+
     def __init__(self, element: Element):
         self.element = element
 

@@ -57,17 +57,17 @@ def test_register_student():
 
     s('#example-modal-sizes-title-lg').should(have.exact_text('Thanks for submitting the form'))
 
-    results = Table(s('.modal-dialog'))
+    results = Table(s('.modal-content .table'))
 
-    results.cells_of_row(0).should(have.exact_text('Student Name Olga Lastname'))
-    results.cells_of_row(1).should(have.exact_text('Student Email test@test.com'))
-    results.cells_of_row(2).should(have.exact_text('Gender Female'))
-    results.cells_of_row(3).should(have.exact_text('Mobile 1111111111'))
-    results.cells_of_row(4).should(have.exact_text('Date of Birth 31 August,1988'))
-    results.cells_of_row(5).should(have.exact_text('Subjects Chemistry, Maths'))
-    results.cells_of_row(6).should(have.exact_text('Hobbies Sports'))
-    results.cells_of_row(7).should(have.exact_text('Picture 01.jpg'))
-    results.cells_of_row(8).should(have.exact_text('Address Some test address'))
-    results.cells_of_row(9).should(have.exact_text('State and City NCR Delhi'))
+    results.cells_of_row(row=1, column=2).should(have.exact_text('Olga Lastname'))
+    results.cells_of_row(row=2, column=2).should(have.exact_text('test@test.com'))
+    results.cells_of_row(row=3, column=2).should(have.exact_text('Female'))
+    results.cells_of_row(row=4, column=2).should(have.exact_text('1111111111'))
+    results.cells_of_row(row=5, column=2).should(have.exact_text('31 August,1988'))
+    results.cells_of_row(row=6, column=2).should(have.exact_text('Chemistry, Maths'))
+    results.cells_of_row(row=7, column=2).should(have.exact_text('Sports'))
+    results.cells_of_row(row=8, column=2).should(have.exact_text('01.jpg'))
+    results.cells_of_row(row=9, column=2).should(have.exact_text('Some test address'))
+    results.cells_of_row(row=10, column=2).should(have.exact_text('NCR Delhi'))
 
     s('#closeLargeModal').perform(command.js.click)

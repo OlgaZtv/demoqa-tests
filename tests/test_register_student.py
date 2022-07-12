@@ -38,7 +38,7 @@ def test_register_student():
 
     subjects = TagsInput(s('#subjectsInput'))
     subjects.add('Chem', autocomplete='Chemistry')
-    subjects.add('Maths')
+    subjects.autocomplete('Maths')
 
     hobbies_types = s('#hobbiesWrapper')
     hobbies_types.all('.custom-checkbox').element_by(have.exact_text('Sports')).click()

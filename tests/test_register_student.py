@@ -1,7 +1,7 @@
 import allure
 
 from demoqa_tests.model import app
-from demoqa_tests.utils.attach import add_screenshots, add_logs, add_html, add_video
+from utils.attach import add_screenshots, add_logs, add_html, add_video
 
 
 @allure.description('Test sign up form')

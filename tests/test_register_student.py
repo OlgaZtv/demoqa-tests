@@ -1,19 +1,17 @@
 import allure
-from allure_commons.types import AttachmentType
-from selene.support.shared import browser
 
 from demoqa_tests.model import app
-from demoqa_tests.utils.attach import add_screenshot, add_logs, add_html, add_video
+from demoqa_tests.utils.attach import add_screenshots, add_logs, add_html, add_video
 
 
 @allure.description('Test sign up form')
 @allure.title("Successful fill form")
 @allure.tag('UI')
 def test_register_student(setup_browser):
-    app.browser = setup_browser
+    browser = setup_browser
 
     with allure.step("Open registrations form"):
-        (app.given_student_registration_form_opened())
+        app.given_student_registration_form_opened()
 
     with allure.step("Fill form"):
         (app.form \
@@ -34,8 +32,6 @@ def test_register_student(setup_browser):
 
     app.form.submit()
 
-    add_screenshot(name='Screenshot form', type_file=AttachmentType.PNG)
-
     app.form.check_modal_visible('Thanks for submitting the form')
 
     with allure.step("Check form results"):
@@ -53,6 +49,7 @@ def test_register_student(setup_browser):
 
     app.form.close_dialog()
 
+    add_screenshots(browser)
     add_logs(browser)
     add_html(browser)
-    add_video('Video steps of test')
+    add_video(browser)

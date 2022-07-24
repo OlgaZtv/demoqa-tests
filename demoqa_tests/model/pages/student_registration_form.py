@@ -1,8 +1,8 @@
 from selene import have, by
 from selene.core import command
-from selene.support.shared.jquery_style import s, ss
+from selene.support.shared.jquery_style import s
 
-from demoqa_tests.utils.path_to_file import resourse
+from utils.path_to_file import resourse
 
 
 class StudentRegistrationForm:

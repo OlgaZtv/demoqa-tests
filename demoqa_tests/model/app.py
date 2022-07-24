@@ -9,7 +9,7 @@ form = StudentRegistrationForm()
 results = Table()
 
 
-def given_student_registration_form_opened():
+def given_student_registration_form_opened() -> object:
     browser.open('/automation-practice-form')
     (
         ss('[id^=google_ads][id$=container__]').with_(timeout=10)

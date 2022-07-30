@@ -1,8 +1,11 @@
-xxxAEOJu9JEk48VjO0_6d_XwN0b_vdjlqPaEQ
--1001799946630
+5461555374:AAHffOwSU2UlfCFflPomYGDJDjOiLGHk8jA
+-1001606220242
 
-https://api.telegram.org/botxxxAEOJu9JEk48VjO0_6d_XwN0b_vdjlqPaEQ/getUpdates
+https://api.telegram.org/bot5461555374:AAHffOwSU2UlfCFflPomYGDJDjOiLGHk8jA/getUpdates
 
-curl -X POST -H 'Content-Type: application/json' -d '{"chat_id": "-1001799946630", "text": "This is a test from qa.guru", "disable_notification": true}' https://api.telegram.org/botxxxAEOJu9JEk48VjO0_6d_XwN0b_vdjlqPaEQ/sendMessage
+curl -X POST -H 'Content-Type: application/json' -d '{"chat_id": "-1001606220242", "text": "This is a test from qa.guru", "disable_notification": true}' https://api.telegram.org/bot5461555374:AAHffOwSU2UlfCFflPomYGDJDjOiLGHk8jA/sendMessage
 
 java "-DconfigFile=notifications/config.json" -jar notifications/allure-notifications-4.2.1.jar
+
+{"ok":true,"result":[{"update_id":865152696,
+"message":{"message_id":2,"from":{"id":68382029,"is_bot":false,"first_name":"Olga","last_name":"Zatulivetrova","username":"Cineramaniac"},"chat":{"id":-1001606220242,"title":"Bot_python","type":"supergroup"},"date":1659203213,"text":"hello"}}]}
